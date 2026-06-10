@@ -81,30 +81,12 @@ com duas colunas: data/hora e texto em formato byte-string (`b'...'`).
 
 ### No ambiente
 
-1. Abra `notebooks/reproducao_bert_colab.ipynb`.
+1. Abra `tweetsBERT.ipynb`.
 2. Ative a GPU se puder: *Ambiente de execução → Alterar tipo → T4 GPU*.
 3. Execute as células em ordem (upload do `War.csv` quando solicitado).
 4. Tempo estimado: **~50 min** (10 epochs na T4 com AMP).
 5. Ao final, baixe os artefatos (`history.json`, `classification_report.txt`,
    `training_history.png`, `confusion_matrix.png`).
-
-### Opção 2 — Local (requer GPU NVIDIA)
-
-```bash
-pip install -r requirements.txt
-python -m src.preprocessing --input data/War.csv --output data/tweets_clean.csv
-python -m src.labeling --input data/tweets_clean.csv --output data/tweets_labeled.csv
-python -m src.train --data data/tweets_labeled.csv --out results/
-python -m src.evaluate --model results/best_model.bin --test results/test_split.csv
-```
-
-## Saídas geradas
-
-- `results/best_model.bin` — pesos do melhor modelo (maior acurácia de validação)
-- `results/history.json` — acurácia/loss de treino e validação por epoch
-- `results/classification_report.txt` — acurácia, precision, recall e F1 por classe
-- `results/confusion_matrix.png` — matriz de confusão do teste
-- `results/training_history.png` — curva de treino × validação
 
 ## Limitações e análise crítica
 
